@@ -1,10 +1,7 @@
 version: "3.7"
 services:
   overworld:
-    build:
-      context: https://github.com/dst-academy/docker-dontstarvetogether.git#v0.8.0:build
-      args:
-        MODS: 625415718,676297854,356420397,661253977,462434129,589894765,378160973,362175979,831587484,1207269058,1185229307,374550642,728459184,375850593,786556008,458940297
+    image: dstacademy/dontstarvetogether:0.8
     container_name: overworld
     hostname: overworld
     tty: true
@@ -14,6 +11,7 @@ services:
     environment:
       # Defined in YAML because multi-line support, but this can also be injected other ways
       # From a vanilla survival leveldataoverride.lua
+      MODS: 625415718,676297854,356420397,661253977,462434129,589894765,378160973,362175979,831587484,1207269058,1185229307,374550642,728459184,375850593,786556008,458940297
       LEVELDATA_OVERRIDES: |
         return {
           desc="The standard Don't Starve experience.",
@@ -134,10 +132,7 @@ services:
       - /mnt/dontstarvetogether/overworld:/var/lib/dsta/cluster
     restart: always
   underworld:
-    build:
-      context: https://github.com/dst-academy/docker-dontstarvetogether.git#v0.8.0:build
-      args:
-        MODS: 625415718,676297854,356420397,661253977,462434129,589894765,378160973,362175979,831587484,1207269058,1185229307,374550642,728459184,375850593,786556008,458940297
+    image: dstacademy/dontstarvetogether:0.8
     container_name: underworld
     hostname: underworld
     tty: true
@@ -145,6 +140,7 @@ services:
     command: dst-server start --update=all
     env_file: underworld.env
     environment:
+      MODS: 625415718,676297854,356420397,661253977,462434129,589894765,378160973,362175979,831587484,1207269058,1185229307,374550642,728459184,375850593,786556008,458940297
       # Defined in YAML because multi-line support, but this can also be injected other ways
       # From a vanilla caves leveldataoverride.lua
       LEVELDATA_OVERRIDES: |
