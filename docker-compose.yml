@@ -1,7 +1,10 @@
-version: "2"
+version: "3.7"
 services:
   overworld:
-    image: dstacademy/dontstarvetogether:0.8
+    build:
+      context: https://github.com/dst-academy/docker-dontstarvetogether.git#v0.8.0:build
+      args:
+        MODS: 625415718,676297854,356420397,661253977,462434129,589894765,378160973,362175979,831587484,1207269058,1185229307,374550642,728459184,375850593,786556008,458940297
     container_name: overworld
     hostname: overworld
     tty: true
@@ -32,28 +35,28 @@ services:
             beefalo="default",
             beefaloheat="default",
             bees="default",
-            berrybush="default",
+            berrybush="often",
             birds="default",
             boons="default",
             branching="default",
             butterfly="default",
             buzzard="default",
             cactus="default",
-            carrot="default",
+            carrot="often",
             catcoon="default",
             chess="default",
             day="default",
             deciduousmonster="default",
-            deerclops="default",
+            deerclops="never",
             disease_delay="default",
             dragonfly="default",
-            flint="default",
-            flowers="default",
+            flint="often",
+            flowers="often",
             frograin="default",
             goosemoose="default",
-            grass="default",
-            houndmound="default",
-            hounds="default",
+            grass="often",
+            houndmound="rare",
+            hounds="rare",
             hunt="default",
             krampus="default",
             layout_mode="LinkNodesByKeys",
@@ -74,29 +77,29 @@ services:
             pigs="default",
             ponds="default",
             prefabswaps_start="default",
-            rabbits="default",
-            reeds="default",
-            regrowth="default",
+            rabbits="often",
+            reeds="often",
+            regrowth="often",
             roads="default",
-            rock="default",
-            rock_ice="default",
-            sapling="default",
-            season_start="default",
+            rock="often",
+            rock_ice="often",
+            sapling="often",
+            season_start="spring",
             specialevent="default",
             spiders="default",
             spring="default",
             start_location="default",
-            summer="default",
-            tallbirds="default",
+            summer="shortseason",
+            tallbirds="rare",
             task_set="default",
             tentacles="default",
             touchstone="default",
             trees="default",
-            tumbleweed="default",
+            tumbleweed="often",
             walrus="default",
             weather="default",
             wildfires="default",
-            winter="default",
+            winter="shortseason",
             world_size="default",
             wormhole_prefab="wormhole"
           },
@@ -128,9 +131,13 @@ services:
     ports:
       - "10999:10999/udp"
     volumes:
-      - ./overworld:/var/lib/dsta/cluster
+      - /mnt/dontstarvetogether/overworld:/var/lib/dsta/cluster
+    restart: always
   underworld:
-    image: dstacademy/dontstarvetogether:0.8
+    build:
+      context: https://github.com/dst-academy/docker-dontstarvetogether.git#v0.8.0:build
+      args:
+        MODS: 625415718,676297854,356420397,661253977,462434129,589894765,378160973,362175979,831587484,1207269058,1185229307,374550642,728459184,375850593,786556008,458940297
     container_name: underworld
     hostname: underworld
     tty: true
@@ -210,4 +217,5 @@ services:
     links:
       - overworld
     volumes:
-      - ./underworld:/var/lib/dsta/cluster
+      - /mnt/dontstarvetogether/underworld:/var/lib/dsta/cluster
+    restart: always
