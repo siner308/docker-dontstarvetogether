@@ -131,6 +131,12 @@ services:
     volumes:
       - /mnt/dontstarvetogether/overworld:/var/lib/dsta/cluster
     restart: always
+    healthcheck:
+      test: ["CMD", "dst-server", "version", "--check"]
+      interval: 5m
+      timeout: 1m
+      retries: 3
+      start_period: 15m
   underworld:
     image: dstacademy/dontstarvetogether:0.8
     container_name: underworld
@@ -215,3 +221,9 @@ services:
     volumes:
       - /mnt/dontstarvetogether/underworld:/var/lib/dsta/cluster
     restart: always
+    healthcheck:
+      test: ["CMD", "dst-server", "version", "--check"]
+      interval: 5m
+      timeout: 1m
+      retries: 3
+      start_period: 15m
